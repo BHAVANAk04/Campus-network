@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions and Answers</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 40px;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .header h1 {
+            font-size: 2.5em;
+        }
+        .question-box {
+            width: 100%;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .submit-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+        }
+        .submit-button:hover {
+            background-color: #218838;
+        }
+        .questions {
+            margin-top: 40px;
+        }
+        .question {
+            border-bottom: 1px solid #ccc;
+            padding: 20px 0;
+            position: relative;
+        }
+        .question .text {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .question .answer-section {
+            display: none;
+            margin-top: 10px;
+        }
+        .answer-list {
+            margin: 10px 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        .answer-list li {
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-left: 3px solid #007bff;
+            font-size: 1.1em;
+        }
+        .answer-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1.1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .answer-form button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            margin-top: 10px;
+        }
+        .answer-form button:hover {
+            background-color: #218838;
+        }
+        .question .answer-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+        .question .answer-button:hover {
+            background-color: #0056b3;
+        }
+        .response-counter {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-size: 1em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>What would YOU like to ask!?</h1>
+            <textarea class="question-box" placeholder="Type your questions here, we don't judge..."></textarea>
+            <button class="submit-button">Submit Question</button>
+        </div>
+        <div class="questions">
+            <div class="question">
+                <div class="text">What technologies do I learn being a 2nd year student?</div>
+                <div class="response-counter">1</div>
+                <button class="answer-button">ANSWER</button>
+                <div class="answer-section">
+                    <ul class="answer-list">
+                        <li>You should focus on learning data structures and algorithms, along with a programming language like Python or Java. Additionally, get familiar with web development, databases, and version control systems like Git.</li>
+                    </ul>
+                    <form class="answer-form">
+                        <textarea placeholder="Write your opinion here..." rows="3"></textarea>
+                        <button type="submit">Submit Answer</button>
+                    </form>
+                </div>
+            </div>
+            <div class="question">
+                <div class="text">What is DSA, how can I be good at it?</div>
+                <div class="response-counter">1</div>
+                <button class="answer-button">ANSWER</button>
+                <div class="answer-section">
+                    <ul class="answer-list">
+                        <li>DSA stands for Data Structures and Algorithms. To be good at it, practice solving problems on platforms like LeetCode and Codeforces, understand the underlying concepts, and learn how to implement them efficiently in code.</li>
+                    </ul>
+                    <form class="answer-form">
+                        <textarea placeholder="Write your opinion here..." rows="3"></textarea>
+                        <button type="submit">Submit Answer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.submit-button').addEventListener('click', () => {
+            const questionBox = document.querySelector('.question-box');
+            const questionText = questionBox.value.trim();
+
+            if (questionText) {
+                const newQuestion = document.createElement('div');
+                newQuestion.classList.add('question');
+                
+                newQuestion.innerHTML = `
+                    <div class="text">${questionText}</div>
+                    <div class="response-counter">0</div>
+                    <button class="answer-button">ANSWER</button>
+                    <div class="answer-section">
+                        <ul class="answer-list"></ul>
+                        <form class="answer-form">
+                            <textarea placeholder="Write your opinion here..." rows="3"></textarea>
+                            <button type="submit">Submit Answer</button>
+                        </form>
+                    </div>
+                `;
+
+                const questionsContainer = document.querySelector('.questions');
+                questionsContainer.insertBefore(newQuestion, questionsContainer.firstChild);
+                questionBox.value = '';
+
+                // Add event listener for the new answer button
+                newQuestion.querySelector('.answer-button').addEventListener('click', (event) => {
+                    const answerSection = event.target.nextElementSibling;
+                    answerSection.style.display = answerSection.style.display === 'none' || answerSection.style.display === '' ? 'block' : 'none';
+                });
+
+                // Add event listener for the new answer form
+                newQuestion.querySelector('.answer-form').addEventListener('submit', event => {
+                    event.preventDefault();
+
+                    const textarea = event.target.querySelector('textarea');
+                    const answerText = textarea.value.trim();
+
+                    if (answerText) {
+                        const newAnswer = document.createElement('li');
+                        newAnswer.textContent = answerText;
+
+                        const answerList = event.target.previousElementSibling;
+                        answerList.appendChild(newAnswer);
+                        textarea.value = '';
+
+                        // Update the response counter
+                        const responseCounter = newQuestion.querySelector('.response-counter');
+                        responseCounter.textContent = parseInt(responseCounter.textContent) + 1;
+                    }
+                });
+            }
+        });
+
+        document.querySelectorAll('.answer-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const answerSection = button.nextElementSibling;
+                answerSection.style.display = answerSection.style.display === 'none' || answerSection.style.display === '' ? 'block' : 'none';
+            });
+        });
+
+        document.querySelectorAll('.answer-form').forEach(form => {
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+
+                const textarea = form.querySelector('textarea');
+                const answerText = textarea.value.trim();
+
+                if (answerText) {
+                    const newAnswer = document.createElement('li');
+                    newAnswer.textContent = answerText;
+
+                    const answerList = form.previousElementSibling;
+                    answerList.appendChild(newAnswer);
+                    textarea.value = '';
+
+                    // Update the response counter
+                    const responseCounter = form.closest('.question').querySelector('.response-counter');
+                    responseCounter.textContent = parseInt(responseCounter.textContent) + 1;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

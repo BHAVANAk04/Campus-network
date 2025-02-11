@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CampusNetwork</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid #ddd;
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: black;
+            margin-left: 20px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .header a:hover {
+            color: #4caf50;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .header .logo:hover {
+            color: #4caf50;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 80vh;
+            background-color: #d8e5d1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main .image-container img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideInImage 1s ease-out forwards;
+        }
+
+        .main .content {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideInText 1.5s ease-out forwards;
+        }
+
+        @keyframes slideInImage {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInText {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .story-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .story-section .story-content {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .story-section .story-image {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .story-section .story-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideInImage 1s ease-out forwards;
+        }
+
+        .story-section .story-text {
+            flex: 2;
+            text-align: left;
+            animation: slideInText 1.5s ease-out forwards;
+        }
+
+        .story-section .story-text h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .story-section .story-text p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .story-section:last-of-type {
+            margin-bottom: 800px; /* Adds spacing between the last story section and the footer */
+        }
+
+        .footer {
+            background-color: #232f3e;
+            color: white;
+            padding: 20px 40px;
+            font-size: 14px;
+            margin-top: auto; /* Ensures footer stays at the bottom */
+        }
+
+        .footer .footer-columns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .footer .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #f3f3f3;
+        }
+
+        .footer .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer .footer-column ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer .footer-column ul li a {
+            text-decoration: none;
+            color: #ddd;
+            transition: color 0.3s;
+        }
+
+        .footer .footer-column ul li a:hover {
+            color: #4caf50;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            color: #ddd;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">CampusNetwork</div>
+        <nav>
+            <a href="#">Placement Calendar</a>
+            <a href="#">Interview Questions</a>
+            <a href="#">FAQs</a>
+            <a href="#">Feedback</a>
+            <a href="login.html">Log In</a>
+        </nav>
+    </header>
+
+    <div class="main">
+        <div class="image-container">
+            <img src="2.jpg" alt="Student">
+        </div>
+        <div class="content">
+            <h1>Welcome To CampusNetwork!</h1>
+            <h2>Your Go-to Platform for Placement Assistance</h2>
+        </div>
+    </div>
+
+    <!-- Story Section -->
+    <div class="story-section">
+        <div class="story-content">
+            <div class="story-image">
+                <img src="your-image.jpg" alt="1">
+            </div>
+            <div class="story-text">
+                <h2>BLOGS</h2>
+                <p>
+                    The Microsoft interview process was rigorous, starting with coding challenges focusing on data structures and algorithms. It was followed by system design questions and behavioral interviews based on leadership principles.
+                    <br>-Diya Jain
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="story-section">
+        <div class="story-content">
+            <div class="story-image">
+                <img src="your-image.jpg" alt="2">
+            </div>
+            <div class="story-text">
+                <p>
+                    Infosys: The process included an online aptitude test, followed by a technical interview focused on coding and data structures. The final HR round assessed communication skills, teamwork, and career aspirations.
+                    <br>-Adi Jyoti
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h2>Get to Know Us</h2>
+                <ul>
+                    <li><a href="#">About CampusNetwork</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h2>Let Us Help You</h2>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 CampusNetwork. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

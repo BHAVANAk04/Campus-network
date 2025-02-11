@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* General styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 2.5em; /* Increased the font size of the header */
+            margin-bottom: 30px;
+        }
+
+        /* Styling for the login box */
+        .login-box {
+            background-color: white;
+            padding: 40px; /* Increased padding for larger box */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 350px; /* Increased width for larger box */
+            text-align: left;
+        }
+
+        /* Form input styles */
+        .input-group {
+            margin-bottom: 25px; /* Increased space between inputs */
+        }
+
+        .input-group label {
+            font-size: 1.1em; /* Slightly increased font size */
+            color: #333;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 15px; /* Increased padding for larger input fields */
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.1em; /* Increased font size inside input fields */
+        }
+
+        .input-group select {
+            cursor: pointer;
+        }
+
+        /* Button style */
+        .btn {
+            width: 100%;
+            padding: 15px; /* Increased padding for the button */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em; /* Increased font size */
+            cursor: pointer;
+        }
+
+        /* Hover effect for the button */
+        .btn:hover {
+            background-color: #45a049; /* Green hover color */
+        }
+
+        /* Focus effect for input fields */
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #45a049; /* Green border when focused */
+            outline: none; /* Removes the default outline */
+            background-color: #f0f8f0; /* Light green background when focused */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <div class="login-box">
+            <form action="login_action.php" method="POST">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+                <div class="input-group">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

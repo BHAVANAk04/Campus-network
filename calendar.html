@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="viewport" content="="width=device-width, initial-scale=1.0"">
+    <meta charset="UTF-8">
+    <title>Interactive Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .heading {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .heading h1 {
+            font-size: 3em;
+            color: #1F2A22;
+            margin: 0;
+        }
+        .heading p {
+            font-size: 1.2em;
+            color: #5B3D29;
+            margin: 0;
+        }
+        .calendar-container {
+            text-align: center;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .navigation {
+            margin-bottom: 20px;
+        }
+        .navigation button {
+            padding: 15px 30px;
+            background-color: #1F2A22;
+            color: #AFA799;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+        .month {
+            grid-column: span 7;
+            text-align: center;
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #1F2A22;
+        }
+        .day {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+            width: 80px;
+            background-color: #AFA799;
+            color: #1F2A22;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-size: 1.5em;
+            border-radius: 50%;
+            margin: auto;
+            position: relative;
+        }
+        .day .tooltip {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1F2A22;
+            color: #AFA799;
+            padding: 5px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+        .day:hover .tooltip {
+            display: block;
+        }
+        .day.marked {
+            background-color: #5B3D29;
+            color: #fff;
+        }
+        .day-name {
+            font-weight: bold;
+            color: #5B3D29;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1><b>Placement Calendar</b></h1>
+        <p>Know When and Which Company is Coming!!</p>
+    </div>
+    <div class="calendar-container">
+        <div class="navigation">
+            <button onclick="prevMonth()">❮</button>
+            <span id="monthYear"></span>
+            <button onclick="nextMonth()">❯</button>
+        </div>
+        <div id="calendar" class="calendar"></div>
+    </div>
+    <script>
+        const months = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        let currentYear = 2024;
+        let currentMonth = 11; // Starting with December
+
+        const markedDates = {
+            '2024-12-14': { color: 'marked', text: 'Google' },
+            '2024-12-15': { color: 'marked', text: 'Google' }
+        };
+
+        function generateCalendar(year, month) {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+
+            // Update month and year display
+            document.getElementById('monthYear').textContent = `${months[month]} ${year}`;
+
+            // Add day names
+            for (let j = 0; j < days.length; j++) {
+                const dayName = document.createElement('div');
+                dayName.className = 'day-name';
+                dayName.textContent = days[j];
+                calendar.appendChild(dayName);
+            }
+
+            // Add blank days for alignment
+            const firstDay = new Date(year, month, 1).getDay();
+            for (let j = 0; j < firstDay; j++) {
+                const blankDay = document.createElement('div');
+                blankDay.className = 'day';
+                calendar.appendChild(blankDay);
+            }
+
+            // Add days of the month
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            for (let j = 1; j <= daysInMonth; j++) {
+                const day = document.createElement('div');
+                day.className = 'day';
+                day.textContent = j;
+
+                // Add tooltip text if date is marked
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(j).padStart(2, '0')}`;
+                if (markedDates[dateKey]) {
+                    day.classList.add(markedDates[dateKey].color);
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'tooltip';
+                    tooltip.textContent = markedDates[dateKey].text;
+                    day.appendChild(tooltip);
+                }
+
+                day.addEventListener('click', () => {
+                    if (!day.classList.contains('marked')) {
+                        const text = prompt('Enter text for this date:');
+                        if (text) {
+                            day.classList.add('marked');
+                            const tooltip = document.createElement('div');
+                            tooltip.className = 'tooltip';
+                            tooltip.textContent = text;
+                            day.appendChild(tooltip);
+                            markedDates[dateKey] = { color: 'marked', text: text };
+                        }
+                    }
+                });
+
+                calendar.appendChild(day);
+            }
+        }
+
+        function prevMonth() {
+            if (currentMonth === 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else {
+                currentMonth--;
+            }
+            generateCalendar(currentYear, currentMonth);
+        }
+
+        function nextMonth() {
+            if (currentMonth === 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else {
+                currentMonth++;
+            }
+            generateCalendar(currentYear, currentMonth);
+        }
+
+        // Generate calendar for the initial month
+        generateCalendar(currentYear, currentMonth);
+    </script>
+</body>
+</html>
